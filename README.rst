@@ -49,6 +49,9 @@ memcache informations you will need to do one of these::
 It also mean that you need to use memcache or at least the locmem cache backend (only if you have 1 server).
 It might work with a database cache but it will not be the best configuration.
 
+All the informations are stored in daily Statistic models (1 record by label and by day). Those models can be used directly in the admin interface
+to examine interesting metrics of your website.
+
 Installation
 ============
 
