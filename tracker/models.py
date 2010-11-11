@@ -42,11 +42,13 @@ class Tracker(object):
         cache.set('tracker_'+label, 0, TTL)
         return value
 
-    def incr_labels(self, labels):
+    def incr_labels(self, labels, save=True):
         labels = labels.split("|")
         for label in labels:
             self.append(label)
             cache.incr('tracker_'+label)
+        if save:
+            self.save()
 
     def save(self):
         if self.changed:

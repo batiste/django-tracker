@@ -13,7 +13,6 @@ a user do this action you call the backend tracking method::
 
     tracker = Tracker()
     tracker.incr_labels("user_connected|user_clicked_button")
-    tracker.save()
 
 This action will increment the counter for the "user_connected" and the "user_clicked_button" label.
 You can also call the tracker from javascript if you install the tracker view::

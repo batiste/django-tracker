@@ -8,7 +8,6 @@ def track(request):
         return HttpResponse("syntax: ?labels=label1|label2")
     tracker = Tracker()
     tracker.incr_labels(labels)
-    tracker.save()
     return HttpResponse("ok")
 
 def report(request):
