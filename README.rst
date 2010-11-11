@@ -7,10 +7,11 @@ Django tracker - Track users actions
 Introduction
 ============
 
-This package is gonna give you an easy tool to track users
+This package is gonna give you an easy tool to track anonymous user
 actions on your website. You choose a label for an action and everytime
 a user do this action you call the backend tracking method::
 
+    from tracker.models import Tracker
     tracker = Tracker()
     tracker.incr_labels("user_connected|user_clicked_button")
 
@@ -24,7 +25,19 @@ You can also call the tracker from javascript if you install the tracker view::
         (r'^track/', track),
     )
 
-And then you can visit the `/track/?labels=user_connected|user_clicked_button` and it will have the same effect.
+And then you can visit the `/track/?labels=user_connected|user_clicked_button` and it will have the same effect. e.g. with jQuery::
+
+    function track(labels) {
+        $.ajax({
+            url: '/track/?labels='+labels,
+            dataType: 'text',
+            type: "GET",
+            error:function (xhr) {
+            }
+        });
+    }
+
+    track('user_connected|user_clicked_button')
 
 Django tracker is easy on the database and is architectured to use memcache to count every action. To collect the
 memcache informations you will need to do one of these::

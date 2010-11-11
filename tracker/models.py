@@ -35,18 +35,21 @@ class Tracker(object):
         if label not in self.labels:
             self.labels.append(label)
             self.changed = True
-            cache.set('tracker_'+label, 0, TTL)
+            cache.set('tracker_'+label, 0)
 
     def flush_label(self, label):
         value = cache.get('tracker_'+label, 0)
-        cache.set('tracker_'+label, 0, TTL)
+        cache.set('tracker_'+label, 0)
         return value
 
     def incr_labels(self, labels, save=True):
         labels = labels.split("|")
         for label in labels:
             self.append(label)
-            cache.incr('tracker_'+label)
+            try:
+                cache.incr('tracker_'+label)
+            except ValueError:
+                cache.set('tracker_'+label, 0)
         if save:
             self.save()
 
