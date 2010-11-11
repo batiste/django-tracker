@@ -43,9 +43,7 @@ class Tracker(object):
         return value
 
     def incr_labels(self, labels):
-        print labels
         labels = labels.split("|")
-        print labels
         for label in labels:
             self.append(label)
             cache.incr('tracker_'+label)
