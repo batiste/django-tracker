@@ -1,14 +1,14 @@
-=========================================
-Django tracker - Track users action live
-=========================================
+===========================================
+Django tracker - Track users actions
+===========================================
 
 :Version: 0.0.1
 
 Introduction
 ============
 
-This package is gonna give you an easy tool to tack users
-action on your website. You choose a label for an action and everytime
+This package is gonna give you an easy tool to track users
+actions on your website. You choose a label for an action and everytime
 a user do this action you call the backend tracking method::
 
     tracker = Tracker()
@@ -33,6 +33,9 @@ memcache informations you will need to do one of these::
  * Setup and call the `report` view every 2 minutes
  * Setup a cron that call tracker.models.make_daily_report function every 2 minutes
  * Setup the Celery task that is provided in `tracker.tasks`.
+
+It also mean that you need to use memcache or at least the locmem cache backend (only if you have 1 server).
+It might work with a database cache but it will not be the best configuration.
 
 Installation
 ============
