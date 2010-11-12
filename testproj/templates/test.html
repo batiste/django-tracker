@@ -38,13 +38,7 @@
         var absolute_max = max-min;
         var absolute_value = value-min;
         var purcent = absolute_value / absolute_max;
-        // cold blue
-        if(purcent <= 0.5) {
-            return 'rgba(30,40,'+Math.floor((1-purcent) * 255)+', 0.7)';
-        }
-        // hot red
-        if(purcent >= 0.5)
-            return 'rgba('+Math.floor(purcent * 255)+',40,30, 0.7)';
+        return 'rgba('+Math.floor(purcent * 255)+',40,'+Math.floor((1-purcent) * 255)+', 0.7)';
     }
 
     $('#tracked-links a').click(function(e) {
