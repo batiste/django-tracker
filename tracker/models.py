@@ -8,7 +8,7 @@ import re
 TTL = 300 # 5 minutes
 COLLECT_TIME = 120 # every 2 minutes
 
-QUERY_STRING_VALIDATOR = r'[\w.\-\_\|]+'
+QUERY_STRING_VALIDATOR = r'[\w.\-\_\|\+]+'
 
 
 def parse_query(query):
@@ -23,7 +23,7 @@ def parse_query(query):
     labels = query.split('|')
     query_list = []
     for label in labels:
-        parts = label.split('.')
+        parts = label.split('+')
         if len(parts) == 1:
             query_list.append({'lbl':parts[0]})
         if len(parts) == 2:

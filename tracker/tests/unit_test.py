@@ -16,11 +16,11 @@ class UnitTestCase(TestCase):
         self.assertEqual(parse_query(query), [{'lbl': 'label1'},
             {'lbl': 'label2'}])
 
-        query = "label1.cat|label2"
+        query = "label1+cat|label2"
         self.assertEqual(parse_query(query), [{'lbl': 'label1', 'cat': 'cat'},
             {'lbl': 'label2'}])
 
-        query = "label1.cat.ele1|label2"
+        query = "label1+cat+ele1|label2"
         self.assertEqual(parse_query(query),
             [{'lbl': 'label1', 'cat': 'cat', 'domid': 'ele1'},
             {'lbl': 'label2'}])
@@ -43,8 +43,8 @@ class UnitTestCase(TestCase):
     def test_report(self):
 
         tracker = Tracker()
-        tracker.incr_labels('label1.cat1.dom1')
-        tracker.incr_labels('label1.cat1.dom1')
+        tracker.incr_labels('label1+cat1+dom1')
+        tracker.incr_labels('label1+cat1+dom1')
 
         self.assertEqual(Statistic.objects.count(), 0)
 
@@ -59,8 +59,8 @@ class UnitTestCase(TestCase):
         self.assertEqual(stat.category, 'cat1')
         self.assertEqual(stat.dom_id, 'dom1')
 
-        tracker.incr_labels('label1.cat1.dom1')
-        tracker.incr_labels('label1.cat1.dom1')
+        tracker.incr_labels('label1+cat1+dom1')
+        tracker.incr_labels('label1+cat1+dom1')
 
         stat = Statistic.objects.all()[0]
         self.assertEqual(stat.counter, 2)

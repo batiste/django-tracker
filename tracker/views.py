@@ -14,3 +14,6 @@ def report(request):
     make_daily_report()
     return HttpResponse("ok")
 
+def get_stats(request):
+    make_daily_report()
+    return HttpResponse("ok")
