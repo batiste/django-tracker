@@ -1,5 +1,5 @@
 from django.conf.urls.defaults import *
-from tracker.views import track, report
+from tracker.views import track, report, get_stats, test
 
 # Uncomment the next two lines to enable the admin:
 from django.contrib import admin
@@ -15,6 +15,8 @@ urlpatterns = patterns('',
 
     # Uncomment the next line to enable the admin:
     (r'^admin/(.*)', admin.site.root),
+    (r'^test/', test),
     (r'^track/', track),
     (r'^report/', report),
+    (r'^get_stats/', get_stats),
 )

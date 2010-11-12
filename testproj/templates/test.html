@@ -1,0 +1,63 @@
+<html>
+<head>
+<style>
+#tracked-links {overflow:hidden; clear:boht; }
+#tracked-links a { float:left; width:100px; height:100px; border:2px #33f solid; float:left; padding:20px; margin-right:10px }
+</style>
+</head>
+<body>
+
+
+<p>Click on those link to trigger the tracking javascript call.</p>
+
+<div id="tracked-links">
+<a href="#1" id="link1">Test link 1</a>
+<a href="#2" id="link2">Test link 2</a>
+<a href="#3" id="link3">Test link 3</a>
+<a href="#4" id="link4">Test link 4</a>
+</div>
+
+<p><a href="/report/">Report the clicks in the database</a></p>
+<p><a href="#" id="get-stats">Get the statistics</a></p>
+
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"></script>
+<script>
+
+    function track(labels) {
+        $.ajax({
+            url: '/track/?labels='+labels,
+            dataType: 'text',
+            type: "GET",
+            error:function (xhr) {
+            }
+        });
+    }
+
+    $('#tracked-links a').click(function(e) {
+        track('tracked-links-'+this.id+':links:'+this.id);
+    })
+
+    $('#get-stats').click(function(){
+        var dom_ids = "";
+        $.each($('#tracked-links a'), function(index, value) {
+            dom_ids += value.id + '|';
+        });
+        $.ajax({
+            url: '/get_stats/?dom_ids='+dom_ids,
+            dataType: 'json',
+            type: "GET",
+            error:function (xhr) {
+            },
+            success: function(data, textStatus, XMLHttpRequest) {
+                for(stat in data) {
+                    var id = data[stat][0];
+                    var counter = data[stat][1];
+                    var label = data[stat][2];
+                    $('#'+id).text('clicked '+counter+ ' time.')
+                }
+            }
+        });
+
+    });
+
+</script>

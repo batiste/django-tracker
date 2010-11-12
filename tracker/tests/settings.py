@@ -16,14 +16,11 @@ ADMINS = (
     # ('Your Name', 'your_email@domain.com'),
 )
 
-TEMPLATE_LOADERS = (
-    # this syntax is deprecated with django 1.2
-    'django.template.loaders.filesystem.load_template_source',
-    'django.template.loaders.app_directories.load_template_source',
-    # could help
-    'django.template.loaders.eggs.load_template_source',
-)
+TEST_RUNNER = "django_nose.run_tests"
 
+COVERAGE_EXCLUDE_MODULES = ("opalhtml.tests.*", )
+
+TEST_RUNNER = "django_nose.run_tests"
 here = os.path.abspath(os.path.dirname(__file__))
 
 MANAGERS = ADMINS
@@ -45,5 +42,4 @@ INSTALLED_APPS = (
     'django_nose',
     'django.contrib.admin',
     'tracker',
-    'testproj',
 )

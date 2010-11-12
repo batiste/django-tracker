@@ -8,7 +8,7 @@ import re
 TTL = 300 # 5 minutes
 COLLECT_TIME = 120 # every 2 minutes
 
-QUERY_STRING_VALIDATOR = r'[\w.\-\_\|\+]+'
+QUERY_STRING_VALIDATOR = r'[\w.\-\_\|\+ ]+'
 
 
 def parse_query(query):
@@ -23,14 +23,14 @@ def parse_query(query):
     labels = query.split('|')
     query_list = []
     for label in labels:
-        parts = label.split('+')
+        parts = label.split(':')
         if len(parts) == 1:
-            query_list.append({'lbl':parts[0]})
+            query_list.append({'lbl': parts[0]})
         if len(parts) == 2:
-            query_list.append({'lbl':parts[0], 'cat':parts[1]})
+            query_list.append({'lbl': parts[0], 'cat': parts[1]})
         if len(parts) == 3:
-            query_list.append({'lbl':parts[0], 'cat':parts[1],
-                'domid':parts[2]})
+            query_list.append({'lbl': parts[0], 'cat': parts[1],
+                'domid': parts[2]})
         if len(parts) > 3:
             ValueError("Too many dots in your query string.")
     return query_list
@@ -93,7 +93,6 @@ class Tracker(object):
 def make_daily_report():
     tracker = Tracker()
     today = datetime.date.today()
-    print tracker.labels
     for label, values in tracker.labels.items():
 
         cat = values.get('cat', "None")
@@ -102,6 +101,8 @@ def make_daily_report():
         counter = tracker.flush_label(label)
         try:
             s = Statistic.objects.filter(label=label, day=today).latest()
+            s.dom_id = dom_id
+            s.cat = cat
             s.counter += counter
         except Statistic.DoesNotExist:
             s = Statistic(label=label, category=cat, dom_id=dom_id,

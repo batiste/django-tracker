@@ -1,6 +1,12 @@
 from django.http import HttpResponse
+from django.shortcuts import render_to_response
 from django.core import cache
-from tracker.models import Tracker, make_daily_report
+import datetime
+from tracker.models import Tracker, make_daily_report, Statistic
+import cjson
+
+def test(request):
+    return render_to_response('test.html', {})
 
 def track(request):
     labels = request.GET.get('labels', False)
@@ -15,5 +21,11 @@ def report(request):
     return HttpResponse("ok")
 
 def get_stats(request):
-    make_daily_report()
-    return HttpResponse("ok")
+    today = datetime.date.today()
+    dom_ids = request.GET.get('dom_ids', "").split('|')
+    statistics = Statistic.objects.filter(dom_id__in=dom_ids, day=today)
+    stat_list = []
+    for stat in statistics:
+        stat_list.append([stat.dom_id, stat.counter, stat.label])
+
+    return HttpResponse(cjson.encode(stat_list))
