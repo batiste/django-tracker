@@ -40,11 +40,11 @@
         var purcent = absolute_value / absolute_max;
         // cold blue
         if(purcent <= 0.5) {
-            return 'rgb(30,40,'+Math.floor((1-purcent) * 255)+')';
+            return 'rgba(30,40,'+Math.floor((1-purcent) * 255)+', 0.7)';
         }
         // hot red
         if(purcent >= 0.5)
-            return 'rgb('+Math.floor(purcent * 255)+',40,30)';
+            return 'rgba('+Math.floor(purcent * 255)+',40,30, 0.7)';
     }
 
     $('#tracked-links a').click(function(e) {
