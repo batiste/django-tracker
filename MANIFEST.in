@@ -4,6 +4,7 @@ include INSTALL
 include MANIFEST.in
 include README
 include TODO
+include README.rst
 recursive-include docs *
 recursive-include tracker *
 recursive-include tests *
