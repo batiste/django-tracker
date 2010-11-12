@@ -91,6 +91,8 @@ This little script gather the id in the "tracked-links" div and make a request t
 statistics about them. The action counter is then displayed inside the links. Take a look at the testproj
 for an working example.
 
+.. image:: http://github.com/batiste/django-tracker/raw/master/testproj/heatmap.png
+
 
 How does it work?
 ==================
