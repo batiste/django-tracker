@@ -44,7 +44,7 @@ You can also specify 2 extra informations separated by a colon::
     track('user_connected:category:domId')
 
 The category will help in the admin interface to filter your statistics. The dom id
-can be used on a page to create a heat map. Here is an example of how to use the data::
+can be used on a page to create a heat map. Here is simple example of how to use the dom_id information::
 
     <div id="tracked-links">
     <a href="#1" id="link1">Test link 1</a>
@@ -87,9 +87,9 @@ can be used on a page to create a heat map. Here is an example of how to use the
 
     </script>
 
-This little script gather the id in the "tracked-links" div make a request to the server to get the
-statistics about them. The counter is then displayed inside the links. Take a look at the testproj
-for an example.
+This little script gather the id in the "tracked-links" div and make a request to the server to get the
+statistics about them. The action counter is then displayed inside the links. Take a look at the testproj
+for an working example.
 
 
 How does it work?
