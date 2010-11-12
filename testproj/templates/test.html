@@ -33,6 +33,19 @@
         });
     }
 
+    function color(value, min, max) {
+        var absolute_max = max-min;
+        var absolute_value = value-min;
+        var purcent = absolute_value / absolute_max;
+        // cold blue
+        if(purcent <= 0.5) {
+            return 'rgb(30,40,'+Math.floor((1-purcent) * 255)+')';
+        }
+        // hot red
+        if(purcent >= 0.5)
+            return 'rgb('+Math.floor(purcent * 255)+',40,30)';
+    }
+
     $('#tracked-links a').click(function(e) {
         track('tracked-links-'+this.id+':links:'+this.id);
     })
@@ -49,11 +62,22 @@
             error:function (xhr) {
             },
             success: function(data, textStatus, XMLHttpRequest) {
-                for(stat in data) {
+
+                var max_counter = 0;
+                for(stat in data) {
+                    var counter = data[stat][1];
+                    if(counter > max_counter)
+                        max_counter = counter;
+                }
+
+                for(stat in data) {
                     var id = data[stat][0];
                     var counter = data[stat][1];
                     var label = data[stat][2];
+                    var el = $('#'+id);
                     $('#'+id).text('clicked '+counter+ ' time.')
+                    $('#'+id).css('background', color(counter, 0, max_counter))
+                    $('#'+id).css('color', '#fff')
                 }
             }
         });
