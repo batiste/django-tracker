@@ -56,7 +56,6 @@ setup(
     package_data={'pages': data_dirs},
     zip_safe=False,
     install_requires=[
-        'Django'
     ],
     classifiers=[
         "Development Status :: 4 - Beta",
