@@ -42,7 +42,6 @@ INSTALLED_APPS = (
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.sites',
-    'django_nose',
     'django.contrib.admin',
     'tracker',
     'testproj',
