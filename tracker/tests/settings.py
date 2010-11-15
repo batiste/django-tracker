@@ -16,11 +16,8 @@ ADMINS = (
     # ('Your Name', 'your_email@domain.com'),
 )
 
-TEST_RUNNER = "django_nose.run_tests"
-
 COVERAGE_EXCLUDE_MODULES = ("opalhtml.tests.*", )
 
-TEST_RUNNER = "django_nose.run_tests"
 here = os.path.abspath(os.path.dirname(__file__))
 
 MANAGERS = ADMINS
@@ -39,7 +36,6 @@ INSTALLED_APPS = (
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.sites',
-    'django_nose',
     'django.contrib.admin',
     'tracker',
 )

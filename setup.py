@@ -39,8 +39,9 @@ class RunTests(Command):
                         "DJANGO_SETTINGS_MODULE", "settings")
         settings_file = os.environ["DJANGO_SETTINGS_MODULE"]
         settings_mod = __import__(settings_file, {}, {}, [""])
-        execute_manager(settings_mod, argv=[
-            __file__, "test"])
+        from django.test.simple import run_tests as django_test_runner
+        results = django_test_runner(('tracker', ), verbosity=1, interactive=True,
+        extra_tests=[])
         os.chdir(this_dir)
 
 setup(
