@@ -7,8 +7,8 @@ from setuptools import setup, find_packages, Command
 
 import tracker
 
-def local_open(fname):
-    return open(os.path.join(os.path.dirname(__file__), fname))
+def local_read(fname):
+    return codecs.open(fname, "r", "utf-8").read()
 
 import os
 data_dirs = []
@@ -65,5 +65,5 @@ setup(
         "Intended Audience :: Developers",
         "Topic :: Software Development :: Libraries :: Python Modules",
     ],
-    long_description=local_open('README.rst').read(),
+    long_description=local_read('README.rst'),
 )

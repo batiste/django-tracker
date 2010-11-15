@@ -3,6 +3,7 @@ from django.shortcuts import render_to_response
 from django.core import cache
 import datetime
 from tracker.models import Tracker, make_daily_report, Statistic
+from django.contrib.admin.views.decorators import staff_member_required
 import cjson
 
 def test(request):
@@ -20,6 +21,7 @@ def report(request):
     make_daily_report()
     return HttpResponse("ok")
 
+@staff_member_required
 def get_stats(request):
     today = datetime.date.today()
     dom_ids = request.GET.get('dom_ids', "").split('|')
