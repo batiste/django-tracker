@@ -66,5 +66,5 @@ setup(
         "Intended Audience :: Developers",
         "Topic :: Software Development :: Libraries :: Python Modules",
     ],
-    long_description=local_read('README.rst'),
+    long_description='Django tracker is a tool to track users anonymously',
 )
