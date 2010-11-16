@@ -7,15 +7,12 @@ from setuptools import setup, find_packages, Command
 
 import tracker
 
-def local_read(fname):
-    return codecs.open(fname, "r", "utf-8").read()
-
 import os
 data_dirs = []
-for directory in os.walk('pages/templates'):
+for directory in os.walk('tracker/templates'):
     data_dirs.append(directory[0][6:] + '/*.*')
 
-for directory in os.walk('pages/media'):
+for directory in os.walk('tracker/media'):
     data_dirs.append(directory[0][6:] + '/*.*')
 
 class RunTests(Command):
@@ -54,7 +51,7 @@ setup(
     cmdclass={"test": RunTests},
     platforms=["any"],
     packages=find_packages(exclude=['testproj', 'testproj.*']),
-    package_data={'pages': data_dirs},
+    package_data={'tracker': data_dirs},
     zip_safe=False,
     install_requires=[
     ],
